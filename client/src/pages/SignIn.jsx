@@ -44,7 +44,7 @@ export default function SignIn() {
 
   return (
     <div className='p-3 max-w-3xl mx-auto'>
-      <h1 className='text-3xl text-center font-semibold my-5'>Sign Up</h1>
+      <h1 className='text-3xl text-center font-semibold my-5'>Sign In</h1>
       <form onSubmit={handleSubmit} className='flex flex-col gap-6'>
         <input 
           type="text" 
@@ -63,7 +63,7 @@ export default function SignIn() {
         <button
           disabled={loading}
           className='bg-slate-700 text-white p-2 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'
-        > {loading ? 'Loading...' : 'Sign Up'}
+        > {loading ? 'Loading...' : 'Sign In'}
         </button>
       </form>
       <div className='flex gap-2 mt-5 font-semibold text-base'>
