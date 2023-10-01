@@ -7,14 +7,14 @@ export default function Header() {
 
   return (
     <header className='bg-slate-200 shadow-md'>
-        <div className='flex justify-between items-center mx-auto p-3'>
+        <div className='flex justify-between items-center mx-auto p-4'>
             <h1 className='font-bold text-sm sm:text-xl flex flex-wrap'>
                 <Link to='/'>
                     <span className='text-slate-500'>Premium</span>
                     <span className='text-slate-700'>Estate</span>
                 </Link>
             </h1>
-            <form className='bg-slate-100 p-1 rounded-lg flex items-center'>
+            <form className='bg-slate-100 p-2 rounded-lg flex items-center'>
                 <input 
                     type="text" 
                     placeholder='Search...' 
