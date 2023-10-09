@@ -187,7 +187,7 @@ export default function UpdateListing() {
                             <span>Offer</span>
                         </div>
                     </div>
-                    <div className=' flex flex-wrap gap-6'>
+                    <div className='flex flex-wrap gap-6'>
                         <div className='flex items-center gap-2'>
                             <input type="number" id='bedrooms' min='1' max='10' required
                             className='p-3 border border-gray-300 rounded-lg w-14' onChange={handleChange} value={formData.bedrooms}/>
@@ -200,7 +200,7 @@ export default function UpdateListing() {
                         </div>
                         <div className='flex items-center gap-2'>
                             <input type="number" id='regularPrice' required
-                            className='p-3 border border-gray-300 rounded-lg w-16' onChange={handleChange} value={formData.regularPrice}/>
+                            className='p-3 border border-gray-300 rounded-lg' onChange={handleChange} value={formData.regularPrice}/>
                             <div className='flex flex-col items-center'>
                                 <p>Regular price</p>
                                 <span className='text-xs'>($ / month)</span>
@@ -209,7 +209,7 @@ export default function UpdateListing() {
                         {formData.offer && (
                             <div className='flex items-center gap-2'>
                                 <input type="number" id='discountPrice' required
-                                className='p-3 border border-gray-300 rounded-lg w-16' onChange={handleChange} value={formData.discountPrice}/>
+                                className='p-3 border border-gray-300 rounded-lg' onChange={handleChange} value={formData.discountPrice}/>
                                 <div className='flex flex-col items-center'>
                                     <p>Discounted price</p>
                                     <span className='text-xs'>($ / month)</span>
@@ -240,7 +240,7 @@ export default function UpdateListing() {
                         </div>
                     ))}
                     <button disabled={loading || uploading} className='p-3 bg-slate-700 text-white rounded-lg uppercase 
-                    hover:opacity-95 disabled:opacity-80'>{loading ? 'Creating...' : 'Update listing'}</button>
+                    hover:opacity-95 disabled:opacity-80'>{loading ? 'Updating...' : 'Update listing'}</button>
                     {error && <p className='text-res-700'>{error}</p>}
 
                 </div>
