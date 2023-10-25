@@ -5,3 +5,7 @@
 body{
     background-color: rgb(241, 245, 241);
 }
+
+.message-box{
+    height: calc(100vh - 72px);
+}
