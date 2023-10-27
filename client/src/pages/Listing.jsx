@@ -5,9 +5,10 @@ import SwiperCore from 'swiper';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css/bundle';
 import { FaBath, FaBed, FaChair, FaMapMarkedAlt, FaParking, FaShare } from 'react-icons/fa';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Contact from '../components/Contact';
+import { createAndGetChat } from '../redux/chat/chatSlice';
 
 export default function Listing() {
     SwiperCore.use([Navigation]);
@@ -18,9 +19,6 @@ export default function Listing() {
     const [contact, setContact] = useState(false);
     const params = useParams();
     const { currentUser } = useSelector((state) => state.user);
-
-    console.log('listing', listing?.userRef)
-    console.log('current logged in user id', currentUser?._id)
 
     useEffect(() => {
         const fetchListing = async () => {

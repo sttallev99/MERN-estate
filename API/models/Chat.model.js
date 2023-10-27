@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 
 const chatSchema = new mongoose.Schema({
-    members: Array
+    members: Array,
+    listingId: String
 }, {timestamps: true});
 
 const Chat = mongoose.model('Chat', chatSchema);

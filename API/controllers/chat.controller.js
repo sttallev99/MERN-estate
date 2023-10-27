@@ -4,19 +4,19 @@ import { errorHandler } from '../utils/error.js';
 
 //create chat
 export const createChat = async (req, res, next) => {
-    const {firstId, secondId} = req.body;
+    const {firstId, secondId, listingId} = req.body;
 
     if(!firstId || !secondId) return next(errorHandler(500, 'SenderId and receiverId are required!'))
 
     
     try{
-        const chat = await Chat.findOne({members: {$all: [firstId, secondId]}});
+        const chat = await Chat.findOne({ listingId });
         if(chat) return res.status(200).json(chat);
         
-        const newChat = new Chat({members: [firstId, secondId]});
+        const newChat = new Chat({members: [firstId, secondId], listingId});
         
-        await newChat.save();
-        res.status(200).json('Chat created successfully!')
+        const response = await newChat.save();
+        res.status(200).json(response);
     }catch(err) {
         res.status(500).json(err);
     }

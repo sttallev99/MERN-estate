@@ -1,10 +1,17 @@
 import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { createAndGetChat } from '../redux/chat/chatSlice';
 
 export default function Contact({listing}) {
   const [landlord, setLandlord] = useState(null);
   const [message, setMessage] = useState('');
-  
+
+  const currentUser = useSelector(state => state.user.currentUser);
+  const chatsStatus = useSelector(state => state.chat.status);
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const fetchLandlord = async () => {
       try{
@@ -15,13 +22,19 @@ export default function Contact({listing}) {
         console.log(err);
       }
     }
-
+    
     fetchLandlord();
   },[listing.userRef]);
-
-
+  
+  
   const handleChange = (e) => {
     setMessage(e.target.value)
+  }
+
+  const handleSendMessage = () => {
+    if(chatsStatus === 'idle') {
+      dispatch(createAndGetChat({firstId: currentUser._id, secondId: listing.userRef, listingId: listing._id}));
+    }
   }
 
   return (
@@ -55,6 +68,7 @@ export default function Contact({listing}) {
           <Link 
           to='/messages'
           className='bg-slate-700 text-white text-center p-3 uppercase rounded-lg hover:opacity-95'
+          onClick={handleSendMessage}
           >Send Message</Link>
         </div>
       )}

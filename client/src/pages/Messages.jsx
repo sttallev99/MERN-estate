@@ -2,22 +2,26 @@ import { MdClose } from 'react-icons/md';
 
 import UserChatCard from '../components/chat/UserChatCard'
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export default function Messages() {
+  const chats = useSelector(state => state.chat.chats);
+
   return (
     <div className='message-box flex justify-center items-center'>
       <div className='w-4/5 h-2/3 p-5 flex bg-white shadow-md'>
         <div className='w-1/4'>
             <p className='flex justify-center items-center font-semibold text-xl h-16'>Chats</p>
             <div className='h-[calc(100%-88px)] overflow-auto'>
+                {/* <UserChatCard />
                 <UserChatCard />
                 <UserChatCard />
                 <UserChatCard />
                 <UserChatCard />
                 <UserChatCard />
                 <UserChatCard />
-                <UserChatCard />
-                <UserChatCard />
+                <UserChatCard /> */}
+                {chats.map(chat => <UserChatCard />)}
             </div>
         </div>
         <div className='w-3/4 px-5'>
