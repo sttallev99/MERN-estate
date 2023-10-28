@@ -4,13 +4,26 @@ import {Swiper, SwiperSlide} from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
+import { useDispatch, useSelector } from 'react-redux';
 
 import ListingItem from '../components/ListingItem';
+import { getUserChats } from '../redux/chat/chatSlice';
 
 export default function Home() {
   const [offerListings, setOfferListings] = useState([]);
   const [saleListings, setSaleListings] = useState([]);
   const [rentListings, setRentListings] = useState([]);
+
+  const dispatch = useDispatch();
+  const chats = useSelector(state => state.chat.chats);
+  const currentUser = useSelector(state => state.user.currentUser);
+
+
+  useEffect(() => {
+    if(currentUser && chats === null) {
+      dispatch(getUserChats(currentUser?._id));
+    }
+  }, [chats, dispatch]);
 
   useEffect(() => {
     const fetchOfferListings = async () => {
@@ -47,9 +60,6 @@ export default function Home() {
     fetchOfferListings();
   },[]);
 
-  console.log(offerListings);
-  console.log(rentListings);
-  console.log(saleListings);
   return (
     <div>
       {/* top */}

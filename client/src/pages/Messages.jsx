@@ -2,26 +2,27 @@ import { MdClose } from 'react-icons/md';
 
 import UserChatCard from '../components/chat/UserChatCard'
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { getUserChats } from '../redux/chat/chatSlice';
 
 export default function Messages() {
   const chats = useSelector(state => state.chat.chats);
+  const currentUser = useSelector(state => state.user.currentUser);
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    if(chats === null && currentUser) {
+      dispatch(getUserChats(currentUser._id));
+    }
+  }, [chats, dispatch])
   return (
     <div className='message-box flex justify-center items-center'>
       <div className='w-4/5 h-2/3 p-5 flex bg-white shadow-md'>
         <div className='w-1/4'>
             <p className='flex justify-center items-center font-semibold text-xl h-16'>Chats</p>
             <div className='h-[calc(100%-88px)] overflow-auto'>
-                {/* <UserChatCard />
-                <UserChatCard />
-                <UserChatCard />
-                <UserChatCard />
-                <UserChatCard />
-                <UserChatCard />
-                <UserChatCard />
-                <UserChatCard /> */}
-                {chats.map(chat => <UserChatCard />)}
+                {chats?.map(chat => <UserChatCard chat={chat} user={currentUser} key={chat._id} />)}
             </div>
         </div>
         <div className='w-3/4 px-5'>

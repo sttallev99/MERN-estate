@@ -2,10 +2,10 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const initialState = {
-    chats: [],
+    chats: null,
     selectedChat: null,
     status: 'idle', //idle | loading | succeeded | failed
-    error: null
+    chatsError: null
 };
 
 export const chatSlice = createSlice({
@@ -23,16 +23,21 @@ export const chatSlice = createSlice({
                 state.chats = state.chats.concat(action.payload);
                 state.selectedChat = action.payload;
             })
+            .addCase(getUserChats.fulfilled, (state, action) => {
+                state.chats = action.payload;
+            })
     }
 });
 
 export const createAndGetChat = createAsyncThunk('chats/createAndGetChat',  async(chatData) => {
     const {firstId, secondId, listingId} = chatData;
-    console.log(firstId);
-    console.log(secondId);
-    console.log(listingId);
     const response = await axios.post('/api/chat', {firstId, secondId, listingId});
     return response.data;
 });
+
+export const getUserChats = createAsyncThunk('chat/getUserChats', async(userId) => {
+    const response = await axios.get('/api/chat/' + userId);
+    return response.data;
+})
 
 export default chatSlice.reducer;
