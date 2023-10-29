@@ -7,6 +7,7 @@ import userRouter from './routes/user.route.js';
 import authRouter from './routes/auth.router.js';
 import listingRouter from './routes/listing.router.js';
 import chatRouter from './routes/chat.router.js';
+import messageRouter from './routes/message.router.js';
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/listing', listingRouter);
 app.use('/api/chat', chatRouter);
+app.use('/api/message', messageRouter);
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
