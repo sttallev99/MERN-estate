@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { createAndGetChat } from '../redux/chat/chatSlice';
+import { createAndGetChat, selectListing } from '../redux/chat/chatSlice';
 
 export default function Contact({listing}) {
   const [landlord, setLandlord] = useState(null);
@@ -34,6 +34,7 @@ export default function Contact({listing}) {
   const handleSendMessage = () => {
     if(chatsStatus === 'idle') {
       dispatch(createAndGetChat({firstId: currentUser._id, secondId: listing.userRef, listingId: listing._id}));
+      dispatch(selectListing(listing));
     }
   }
 

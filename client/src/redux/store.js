@@ -5,14 +5,15 @@ import storage from 'redux-persist/lib/storage';
 import userReducer from './user/userSlice';
 import chatReducer from './chat/chatSlice';
 import persistStore from 'redux-persist/es/persistStore';
+import messageSlice from './message/messageSlice';
 
-const rootReducer = combineReducers({user: userReducer, chat: chatReducer});
+const rootReducer = combineReducers({user: userReducer, chat: chatReducer, message: messageSlice});
 
 const persistConfig = {
   key: 'root',
   storage,
   version: 1,
-  blacklist: ['chat']
+  blacklist: ['chat', 'message']
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

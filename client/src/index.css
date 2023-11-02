@@ -9,3 +9,21 @@ body{
 .message-box{
     height: calc(100vh - 72px);
 }
+
+.client-chat{
+    width: fit-content;
+    max-width: 50%;
+    word-wrap: break-word;
+    padding: 7px 10px;
+    border-radius: 10px 10px  10px 0;
+    margin: 10px 0;
+}
+
+.my-chat{
+    width: fit-content;
+    max-width: 50%;
+    word-wrap: break-word;
+    padding: 7px 10px;
+    border-radius: 10px 10px 0 10px;
+    margin: 10px 0 10px auto
+}

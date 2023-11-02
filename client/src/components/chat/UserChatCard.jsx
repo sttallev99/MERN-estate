@@ -1,11 +1,20 @@
+import { useDispatch } from 'react-redux';
+
 import { useFetchRecipientOfferDetails } from '../../hooks/useFetchRecipientOfferDetails';
 import { modifyString } from '../../utils/modifyString';
+import { selectChat, selectListing } from '../../redux/chat/chatSlice';
+
 
 export default function UserChatCard({chat, user}) {
   const listing = useFetchRecipientOfferDetails(chat.listingId);
 
+  const dispatch = useDispatch();
+
   return (
-    listing && <div className='bg-slate-100 m-6 h-16 rounded-lg cursor-pointer flex'>
+    listing && <div className='bg-slate-100 m-6 h-16 rounded-lg cursor-pointer flex' onClick={() => {
+      dispatch(selectChat(chat));
+      dispatch(selectListing(listing));
+    }}>
         <div className='flex items-center relative'>
             <img 
             src={listing.imageUrls[0]}

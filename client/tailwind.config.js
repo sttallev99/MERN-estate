@@ -5,7 +5,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      spacing: {
+        '6/7': '90%',
+      }
+    },
   },
   plugins: [
     require('@tailwindcss/line-clamp'),
