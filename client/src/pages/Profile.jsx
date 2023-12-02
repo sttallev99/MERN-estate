@@ -16,6 +16,7 @@ import {
   signOutUserSuccess,
   signOutUserFailure
 } from '../redux/user/userSlice';
+import { removeToken } from '../redux/socket/socketSlice';
 
 export default function Profile() {
   const fileRef = useRef(null);
@@ -27,6 +28,9 @@ export default function Profile() {
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const [showListingsError, setShowListingsEror] = useState(false);
   const [userListings, setUserListing] = useState([]);
+  const socket = useSelector(state => state.socket);
+
+  console.log(socket);
   
   const dispatch = useDispatch();
 
@@ -115,6 +119,8 @@ export default function Profile() {
         return;
       }
       dispatch(signOutUserSuccess(data));
+      socket.value.disconnect();
+      dispatch(removeToken());
     }catch(err){
       dispatch(signOutUserFailure(err.message));
     }

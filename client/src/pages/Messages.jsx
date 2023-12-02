@@ -9,22 +9,23 @@ import UserChatCard from '../components/chat/UserChatCard'
 import { getUserChats, selectListing } from '../redux/chat/chatSlice';
 import Message from '../components/chat/Message';
 import { createMessage, getMessages } from '../redux/message/messageSlice';
+import { useGetChatsQuery } from '../redux/api/apiSlice'; 
 
 export default function Messages() {
   const [text, setText] = useState('');
-  const chats = useSelector(state => state.chat.chats);
   const currentUser = useSelector(state => state.user.currentUser);
   const {selectedChat, selectedListing} = useSelector(state => state.chat);
   const messages = useSelector(state => state.message.messages)
   const dispatch = useDispatch();
+  const { data: chats } = useGetChatsQuery(currentUser._id);
 
-  console.log('messages', messages)
+  // console.log('messages', messages)
 
-  useEffect(() => {
-    if(chats === null && currentUser) {
-      dispatch(getUserChats(currentUser._id));
-    }
-  }, [chats, dispatch]);
+  // useEffect(() => {
+  //   if(chats === null && currentUser) {
+  //     dispatch(getUserChats(currentUser._id));
+  //   }
+  // }, [chats, dispatch]);
 
   
   useEffect(() => {

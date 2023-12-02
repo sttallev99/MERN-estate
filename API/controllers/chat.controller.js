@@ -25,7 +25,6 @@ export const createChat = async (req, res, next) => {
 //get user chats
 export const getUserChats = async (req, res, next) => {
     const userId = req.params.userId;
-    console.log(userId);
 
     try{
         const chats = await Chat.find({members: { $in: [userId]}});

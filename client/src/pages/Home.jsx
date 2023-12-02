@@ -5,9 +5,10 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
 import { useDispatch, useSelector } from 'react-redux';
+import { io } from 'socket.io-client';
 
 import ListingItem from '../components/ListingItem';
-import { getUserChats } from '../redux/chat/chatSlice';
+import { addSocket } from '../redux/socket/socketSlice';
 
 export default function Home() {
   const [offerListings, setOfferListings] = useState([]);
@@ -15,15 +16,15 @@ export default function Home() {
   const [rentListings, setRentListings] = useState([]);
 
   const dispatch = useDispatch();
-  const chats = useSelector(state => state.chat.chats);
   const currentUser = useSelector(state => state.user.currentUser);
-
+  const socket = useSelector(state => state.socket);
 
   useEffect(() => {
-    if(currentUser && chats === null) {
-      dispatch(getUserChats(currentUser?._id));
+    if(currentUser && socket.value === null) {
+      const socket = io('http://localhost:3000');
+      dispatch(addSocket(socket));
     }
-  }, [chats, dispatch]);
+  }, [socket, currentUser, dispatch]);
 
   useEffect(() => {
     const fetchOfferListings = async () => {

@@ -2,6 +2,8 @@ import express from 'express';
 import mongoose from 'mongoose';
 import 'dotenv/config';
 import cookieParser from 'cookie-parser';
+import http from 'http';
+import { Server } from 'socket.io';
 
 import userRouter from './routes/user.route.js';
 import authRouter from './routes/auth.router.js';
@@ -10,6 +12,7 @@ import chatRouter from './routes/chat.router.js';
 import messageRouter from './routes/message.router.js';
 
 const app = express();
+const server = http.createServer(app);
 
 app.use(express.json());
 app.use(cookieParser());
@@ -30,10 +33,25 @@ app.use((err, req, res, next) => {
     });
 });
 
+const io = new Server(server, {
+    cors: 'http://127.0.0.1:5173',
+});
+
+io.on('connection', (socket) => {
+    console.log('User connected - ' + socket.id);
+
+    socket.on('disconnect', () => {
+        console.log('User disconnected!')
+    })
+},
+)
+
+
+
 mongoose.connect(process.env.MONGO)
     .then(() => console.log('Connected to DB'))
     .catch((err) => console.log(err));
 
-app.listen(3000, () => {
+server.listen(3000, () => {
     console.log('Server is running on http://localhost:3000')
 })
