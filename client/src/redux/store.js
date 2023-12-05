@@ -7,6 +7,7 @@ import chatReducer from './chat/chatSlice';
 import persistStore from 'redux-persist/es/persistStore';
 import messageSlice from './message/messageSlice';
 import socketSlice from './socket/socketSlice';
+import onlineListingSlice from './onlineListing/onlineListingSlice';
 import { apiSlice } from './api/apiSlice';
 
 const rootReducer = combineReducers({
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   chat: chatReducer, 
   message: messageSlice,
   socket: socketSlice,
+  onlineListing: onlineListingSlice,
   [apiSlice.reducerPath]: apiSlice.reducer
 });
 
@@ -21,7 +23,7 @@ const persistConfig = {
   key: 'root',
   storage,
   version: 1,
-  blacklist: ['chat', 'message', 'api', 'socket']
+  blacklist: ['chat', 'message', 'api', 'socket', 'onlineListing']
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

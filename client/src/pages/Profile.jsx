@@ -17,6 +17,7 @@ import {
   signOutUserFailure
 } from '../redux/user/userSlice';
 import { removeToken } from '../redux/socket/socketSlice';
+import useConnectAndGetOnlineListings from '../hooks/useConnectAndGetOnlineListings';
 
 export default function Profile() {
   const fileRef = useRef(null);
@@ -30,9 +31,9 @@ export default function Profile() {
   const [userListings, setUserListing] = useState([]);
   const socket = useSelector(state => state.socket);
 
-  console.log(socket);
-  
   const dispatch = useDispatch();
+
+  useConnectAndGetOnlineListings();
 
   useEffect(() => {
     if(file) {

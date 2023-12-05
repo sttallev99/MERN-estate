@@ -37,10 +37,25 @@ const io = new Server(server, {
     cors: 'http://127.0.0.1:5173',
 });
 
+let onlineUserListings = [];
+
 io.on('connection', (socket) => {
     console.log('User connected - ' + socket.id);
 
+    socket.on('addOnlineUserListings', (userListings, socketId) => {
+        userListings.forEach(listing => {
+            !onlineUserListings.some(prevListing => prevListing._id === listing._id) &&
+            onlineUserListings.push({
+                ...listing,
+                socketId
+            })
+        });
+        io.emit('getOnlineUserListings', onlineUserListings);
+    });
+
     socket.on('disconnect', () => {
+        onlineUserListings = onlineUserListings.filter(listing => listing.socketId !== socket.id);
+        io.emit('getOnlineUserListings', onlineUserListings);
         console.log('User disconnected!')
     })
 },

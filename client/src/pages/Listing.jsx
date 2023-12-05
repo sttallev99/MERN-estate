@@ -5,10 +5,10 @@ import SwiperCore from 'swiper';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css/bundle';
 import { FaBath, FaBed, FaChair, FaMapMarkedAlt, FaParking, FaShare } from 'react-icons/fa';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import Contact from '../components/Contact';
-import { createAndGetChat } from '../redux/chat/chatSlice';
+import useConnectAndGetOnlineListings from '../hooks/useConnectAndGetOnlineListings';
 
 export default function Listing() {
     SwiperCore.use([Navigation]);
@@ -19,6 +19,8 @@ export default function Listing() {
     const [contact, setContact] = useState(false);
     const params = useParams();
     const { currentUser } = useSelector((state) => state.user);
+
+    useConnectAndGetOnlineListings();
 
     useEffect(() => {
         const fetchListing = async () => {

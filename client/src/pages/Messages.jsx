@@ -6,10 +6,10 @@ import InputEmoji from 'react-input-emoji';
 import { BsFillSendFill } from 'react-icons/bs'
 
 import UserChatCard from '../components/chat/UserChatCard'
-import { getUserChats, selectListing } from '../redux/chat/chatSlice';
 import Message from '../components/chat/Message';
 import { createMessage, getMessages } from '../redux/message/messageSlice';
 import { useGetChatsQuery } from '../redux/api/apiSlice'; 
+import useConnectAndGetOnlineListings from '../hooks/useConnectAndGetOnlineListings';
 
 export default function Messages() {
   const [text, setText] = useState('');
@@ -18,15 +18,8 @@ export default function Messages() {
   const messages = useSelector(state => state.message.messages)
   const dispatch = useDispatch();
   const { data: chats } = useGetChatsQuery(currentUser._id);
-
-  // console.log('messages', messages)
-
-  // useEffect(() => {
-  //   if(chats === null && currentUser) {
-  //     dispatch(getUserChats(currentUser._id));
-  //   }
-  // }, [chats, dispatch]);
-
+  
+  useConnectAndGetOnlineListings();
   
   useEffect(() => {
     if(selectedChat) {
