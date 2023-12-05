@@ -1,12 +1,16 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { useFetchRecipientOfferDetails } from '../../hooks/useFetchRecipientOfferDetails';
 import { modifyString } from '../../utils/modifyString';
 import { selectChat, selectListing } from '../../redux/chat/chatSlice';
 
 
-export default function UserChatCard({chat, user}) {
+export default function UserChatCard({chat }) {
   const listing = useFetchRecipientOfferDetails(chat.listingId);
+  const onlineUserListings = useSelector(state => state.onlineListing.value);
+
+  const isOnline = onlineUserListings?.some(onlineListing => onlineListing?._id === listing?._id);
+  console.log(isOnline);
 
   const dispatch = useDispatch();
 
@@ -21,7 +25,9 @@ export default function UserChatCard({chat, user}) {
             alt=""
             className='w-12 h-12 rounded-full mx-2 p-1' 
             />
-            <p className='bg-green-500 w-3 h-3 absolute top-3 right-0 rounded-full'></p>
+            {
+              isOnline && <p className='bg-green-500 w-3 h-3 absolute top-3 right-0 rounded-full'></p>
+            }
         </div>
         <div className='w-full m-2'>
             <div className='flex justify-between pl-2'>
