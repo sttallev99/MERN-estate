@@ -4,8 +4,6 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { app } from '../firebase';
-import useConnectAndGetOnlineListings from '../hooks/useConnectAndGetOnlineListings';
-
 
 export default function CreateListing() {
     const [files, setFiles] = useState([]);
@@ -30,8 +28,6 @@ export default function CreateListing() {
 
     const { currentUser } = useSelector((state) => state.user);
     const navigate = useNavigate();
-
-    useConnectAndGetOnlineListings();
 
     const handleImageSubmit = (e) => {
         if(files.length > 0 && formData.imageUrls?.length + files.length < 7) {

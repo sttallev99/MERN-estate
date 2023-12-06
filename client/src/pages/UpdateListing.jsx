@@ -4,8 +4,6 @@ import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { app } from '../firebase';
-import useConnectAndGetOnlineListings from '../hooks/useConnectAndGetOnlineListings';
-
 
 export default function UpdateListing() {
     const [files, setFiles] = useState([]);
@@ -31,8 +29,6 @@ export default function UpdateListing() {
     const { currentUser } = useSelector((state) => state.user);
     const navigate = useNavigate();
     const params = useParams();
-
-    useConnectAndGetOnlineListings();
 
     useEffect(() => {
         const fetchListing = async () => {

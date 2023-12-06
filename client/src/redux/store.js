@@ -6,16 +6,12 @@ import userReducer from './user/userSlice';
 import chatReducer from './chat/chatSlice';
 import persistStore from 'redux-persist/es/persistStore';
 import messageSlice from './message/messageSlice';
-import socketSlice from './socket/socketSlice';
-import onlineListingSlice from './onlineListing/onlineListingSlice';
 import { apiSlice } from './api/apiSlice';
 
 const rootReducer = combineReducers({
   user: userReducer, 
   chat: chatReducer, 
   message: messageSlice,
-  socket: socketSlice,
-  onlineListing: onlineListingSlice,
   [apiSlice.reducerPath]: apiSlice.reducer
 });
 

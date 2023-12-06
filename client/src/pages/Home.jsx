@@ -8,15 +8,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { io } from 'socket.io-client';
 
 import ListingItem from '../components/ListingItem';
-import { addSocket } from '../redux/socket/socketSlice';
-import useConnectAndGetOnlineListings from '../hooks/useConnectAndGetOnlineListings';
 
 export default function Home() {
   const [offerListings, setOfferListings] = useState([]);
   const [saleListings, setSaleListings] = useState([]);
   const [rentListings, setRentListings] = useState([]);
-
-  useConnectAndGetOnlineListings();
 
   useEffect(() => {
     const fetchOfferListings = async () => {

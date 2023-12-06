@@ -16,8 +16,6 @@ import {
   signOutUserSuccess,
   signOutUserFailure
 } from '../redux/user/userSlice';
-import { removeToken } from '../redux/socket/socketSlice';
-import useConnectAndGetOnlineListings from '../hooks/useConnectAndGetOnlineListings';
 
 export default function Profile() {
   const fileRef = useRef(null);
@@ -32,8 +30,6 @@ export default function Profile() {
   const socket = useSelector(state => state.socket);
 
   const dispatch = useDispatch();
-
-  useConnectAndGetOnlineListings();
 
   useEffect(() => {
     if(file) {

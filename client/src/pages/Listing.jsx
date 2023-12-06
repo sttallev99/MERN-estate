@@ -8,7 +8,6 @@ import { FaBath, FaBed, FaChair, FaMapMarkedAlt, FaParking, FaShare } from 'reac
 import { useSelector } from 'react-redux';
 
 import Contact from '../components/Contact';
-import useConnectAndGetOnlineListings from '../hooks/useConnectAndGetOnlineListings';
 
 export default function Listing() {
     SwiperCore.use([Navigation]);
@@ -19,8 +18,6 @@ export default function Listing() {
     const [contact, setContact] = useState(false);
     const params = useParams();
     const { currentUser } = useSelector((state) => state.user);
-
-    useConnectAndGetOnlineListings();
 
     useEffect(() => {
         const fetchListing = async () => {

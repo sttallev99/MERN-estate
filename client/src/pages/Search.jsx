@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import ListingItem from '../components/ListingItem';
-import useConnectAndGetOnlineListings from '../hooks/useConnectAndGetOnlineListings';
 
 export default function Search() {
   const navigate = useNavigate();
@@ -17,8 +16,6 @@ export default function Search() {
   const [loading, setLoding] = useState(false);
   const [listings, setListings] = useState([]);
   const [showMore, setShowMore] = useState(false);
-
-  useConnectAndGetOnlineListings();
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);

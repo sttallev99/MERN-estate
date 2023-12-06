@@ -9,7 +9,6 @@ import UserChatCard from '../components/chat/UserChatCard'
 import Message from '../components/chat/Message';
 import { createMessage, getMessages } from '../redux/message/messageSlice';
 import { useGetChatsQuery } from '../redux/api/apiSlice'; 
-import useConnectAndGetOnlineListings from '../hooks/useConnectAndGetOnlineListings';
 
 export default function Messages() {
   const [text, setText] = useState('');
@@ -18,8 +17,6 @@ export default function Messages() {
   const messages = useSelector(state => state.message.messages)
   const dispatch = useDispatch();
   const { data: chats } = useGetChatsQuery(currentUser._id);
-  
-  useConnectAndGetOnlineListings();
   
   useEffect(() => {
     if(selectedChat) {
